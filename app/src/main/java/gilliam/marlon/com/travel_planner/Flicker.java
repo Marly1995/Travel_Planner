@@ -1,5 +1,7 @@
 package gilliam.marlon.com.travel_planner;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -13,6 +15,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -28,7 +32,7 @@ public class Flicker {
     private final int PHOTO_SEARCH_ID = 1;
     private final int SIZE_SEARCH_ID = 2;
 
-    private String API_SEARCH_KEY = "9007c694ed9e35889907e0f6423d86e6";
+    private String API_SEARCH_KEY = "&api_key=9007c694ed9e35889907e0f6423d86e6";
 
     private String TAGS = "&tags=";
     private String PHOTO_ID = "&photo_id=";
@@ -37,7 +41,7 @@ public class Flicker {
     private static int CONNECT_TIMEOUT_MS = 5000;
     private static int READ_TIMEOUT_MS = 15000;
 
-    private String createURL(int methodId, String search_parameter)
+    public String createURL(int methodId, String search_parameter)
     {
         String method_type = "";
         String url = null;
@@ -45,7 +49,7 @@ public class Flicker {
         {
             case PHOTO_SEARCH_ID:
                 method_type = SEARCH_PHOTOS;
-                url = URL_BASE + method_type + API_SEARCH_KEY + PHOTO_ID + search_parameter + FORMAT + "&per_page="
+                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=";
                         break;
             case SIZE_SEARCH_ID:
                 method_type = GET_PHOTO_SIZES;
@@ -70,12 +74,64 @@ public class Flicker {
                 JSONObject image = size.getJSONObject(i);
                 if (image.getString("label").equals("Square"))
                 {
+                    photo.setThumbUrl(image.getString("source"));
+                }
+                else if(image.getString("label").equals("Medium"))
+                {
+                    photo.setPhotoUrl(image.getString("source"));
                 }
             }
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public Bitmap getImage(Photo photo)
+    {
+        Bitmap bitmap = null;
+        try
+        {
+            URL aURL = new URL(photo.URL_photo);
+            URLConnection connection = aURL.openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            BufferedInputStream buffInput = new BufferedInputStream(input);
+            bitmap = BitmapFactory.decodeStream(buffInput);
+            buffInput.close();
+            input.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public Bitmap getThumbnail(Photo photo)
+    {
+        Bitmap bitmap = null;
+        try
+        {
+            URL aURL = new URL(photo.URL_thumbnail);
+            URLConnection connection = aURL.openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            BufferedInputStream buffInput = new BufferedInputStream(input);
+            bitmap = BitmapFactory.decodeStream(buffInput);
+            buffInput.close();
+            input.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public void getThumbnails(ArrayList<Photo> photos)
+    {
+
     }
 
     public ByteArrayOutputStream readBytes(String urls)

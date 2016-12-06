@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class Home extends Activity {
 
