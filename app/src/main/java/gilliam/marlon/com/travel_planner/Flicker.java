@@ -43,13 +43,13 @@ public class Flicker {
 
     public String createURL(int methodId, String search_parameter)
     {
-        String method_type = "";
+        String method_type = null;
         String url = null;
         switch (methodId)
         {
             case PHOTO_SEARCH_ID:
                 method_type = SEARCH_PHOTOS;
-                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=";
+                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=10&nojsoncallback=1";
                         break;
             case SIZE_SEARCH_ID:
                 method_type = GET_PHOTO_SIZES;
@@ -108,26 +108,7 @@ public class Flicker {
         return bitmap;
     }
 
-    public Bitmap getThumbnail(Photo photo)
-    {
-        Bitmap bitmap = null;
-        try
-        {
-            URL aURL = new URL(photo.URL_thumbnail);
-            URLConnection connection = aURL.openConnection();
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            BufferedInputStream buffInput = new BufferedInputStream(input);
-            bitmap = BitmapFactory.decodeStream(buffInput);
-            buffInput.close();
-            input.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
+
 
     public void getThumbnails(ArrayList<Photo> photos)
     {

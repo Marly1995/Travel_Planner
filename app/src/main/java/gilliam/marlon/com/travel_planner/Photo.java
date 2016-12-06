@@ -39,4 +39,20 @@ public class Photo {
     {
         URL_photo = url;
     }
+
+    public String createUrl(int photoType, Photo photo)
+    {
+        String temp = "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret;
+        switch(photoType)
+        {
+            case 1:
+                temp += "_t";
+                break;
+            case 2:
+                temp += "_z";
+                break;
+        }
+        temp += ".jpg";
+        return temp;
+    }
 }

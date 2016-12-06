@@ -59,6 +59,7 @@ public class httpConnect {
                         Log.e(TAG, "Error parsing data " + e.toString());
                     }
                     // return json string containing data to tweet activity
+                    restConnection.disconnect();
                     return json;
             }
         } catch (MalformedURLException ex){
