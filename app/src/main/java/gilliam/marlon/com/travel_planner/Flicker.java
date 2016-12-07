@@ -49,7 +49,7 @@ public class Flicker {
         {
             case PHOTO_SEARCH_ID:
                 method_type = SEARCH_PHOTOS;
-                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=10&nojsoncallback=1";
+                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=20&nojsoncallback=1";
                         break;
             case SIZE_SEARCH_ID:
                 method_type = GET_PHOTO_SIZES;

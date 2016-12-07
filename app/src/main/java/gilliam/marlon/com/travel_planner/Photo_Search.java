@@ -1,6 +1,7 @@
 package gilliam.marlon.com.travel_planner;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -47,6 +48,7 @@ public class Photo_Search extends Activity {
 
     Bitmap bit;
 
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,6 @@ public class Photo_Search extends Activity {
         search = (EditText) findViewById(R.id.search);
         gallery = (GridView) findViewById(R.id.gallery);
         imgView = (ImageView) findViewById(R.id.imageView);
-
         //gallery.SetOnClickListener(imageListener);
     }
 
@@ -65,13 +66,6 @@ public class Photo_Search extends Activity {
     {
         photoList.clear();
         new AsyncTaskParseJson().execute();
-    }
-
-    public void displayBitmap(View view)
-    {
-        Photo temp = photoList.get(1);
-        Bitmap bit = getThumbnail(temp);
-        imgView.setImageBitmap(bit);
     }
 
     public class AsyncTaskParseJson extends AsyncTask<String, String, String>
@@ -111,6 +105,7 @@ public class Photo_Search extends Activity {
                         Photo photo = new Photo(id, owner, secret, server, farm, title);
                         photo.setThumbUrl(photo.createUrl(1, photo));
                         bit = getThumbnail(photo);
+                        photo.thumbnail = bit;
                         photoList.add(photo);
                     }
                 }
@@ -128,8 +123,9 @@ public class Photo_Search extends Activity {
             toast.show();
 
             Photo temp = photoList.get(1);
-
-            imgView.setImageBitmap(bit);
+            ImageAdapter imgAdpt = new ImageAdapter(context, photoList);
+            gallery.setAdapter(imgAdpt);
+            //gallery.setImageBitmap(bit);
         }
     }
 

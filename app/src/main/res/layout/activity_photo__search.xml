@@ -40,15 +40,6 @@
         android:id="@+id/gallery"
         android:layout_below="@+id/download"
         android:layout_above="@+id/imageView"
-        android:numColumns="auto_fit" />
+        android:numColumns="4" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show"
-        android:id="@+id/showImage"
-        android:layout_below="@+id/gallery"
-        android:layout_alignParentStart="true"
-        android:onClick="displayBitmap" />
 </RelativeLayout>
