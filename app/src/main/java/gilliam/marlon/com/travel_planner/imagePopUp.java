@@ -2,6 +2,7 @@ package gilliam.marlon.com.travel_planner;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ public class imagePopUp extends Activity{
         extras = getIntent().getExtras();
         if(extras != null)
         {
-            image = (Bitmap) extras.get("PHOTO_ID");
+            image = BitmapFactory.decodeByteArray(extras.getByteArray("PHOTO_ID"), 0, extras.getByteArray("PHOTO_ID").length);
         }
         setContentView(R.layout.image_pop_up);
 

@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -67,9 +68,11 @@ public class Photo_Search extends Activity {
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bitmap img = photoList.get(position).thumbnail;
+                Bitmap img = photoList.get(position).photo;
+                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                img.compress(Bitmap.CompressFormat.PNG, 50, bs);
                 Intent popUp = new Intent(Photo_Search.this, imagePopUp.class);
-                popUp.putExtra("PHOTO_ID", img);
+                popUp.putExtra("PHOTO_ID", bs.toByteArray());
                 startActivity(popUp);
 
             }

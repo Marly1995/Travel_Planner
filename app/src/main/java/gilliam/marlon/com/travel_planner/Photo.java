@@ -48,7 +48,7 @@ public class Photo {
                 temp += "_s";
                 break;
             case 2:
-                temp += "_b";
+                temp += "_z";
                 break;
         }
         temp += ".jpg";
