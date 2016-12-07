@@ -34,6 +34,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="gilliam.marlon.com.travel_planner.Home" />
         </activity>
+        <activity android:name=".imagePopUp"
+            android:theme="@style/AppTheme.CustomTheme"
+        ></activity>
     </application>
 
 </manifest>

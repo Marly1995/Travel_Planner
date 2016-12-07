@@ -2,6 +2,7 @@ package gilliam.marlon.com.travel_planner;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -25,6 +27,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class Photo_Search extends Activity {
@@ -60,6 +63,17 @@ public class Photo_Search extends Activity {
         gallery = (GridView) findViewById(R.id.gallery);
         imgView = (ImageView) findViewById(R.id.imageView);
         //gallery.SetOnClickListener(imageListener);
+
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bitmap img = photoList.get(position).thumbnail;
+                Intent popUp = new Intent(Photo_Search.this, imagePopUp.class);
+                popUp.putExtra("PHOTO_ID", img);
+                startActivity(popUp);
+
+            }
+        });
     }
 
     public void searchPhotos(View view)
@@ -104,8 +118,11 @@ public class Photo_Search extends Activity {
 
                         Photo photo = new Photo(id, owner, secret, server, farm, title);
                         photo.setThumbUrl(photo.createUrl(1, photo));
+                        photo.setPhotoUrl(photo.createUrl(2, photo));
                         bit = getThumbnail(photo);
                         photo.thumbnail = bit;
+                        bit = getImage(photo);
+                        photo.photo = bit;
                         photoList.add(photo);
                     }
                 }
@@ -117,12 +134,10 @@ public class Photo_Search extends Activity {
         }
 
         @Override
-        protected void onPostExecute(String strFromDoInBg)
-        {
+        protected void onPostExecute(String strFromDoInBg) {
             Toast toast = Toast.makeText(Photo_Search.this, "HELLO!", Toast.LENGTH_LONG);
             toast.show();
 
-            Photo temp = photoList.get(1);
             ImageAdapter imgAdpt = new ImageAdapter(context, photoList);
             gallery.setAdapter(imgAdpt);
             //gallery.setImageBitmap(bit);
@@ -159,6 +174,27 @@ public class Photo_Search extends Activity {
             URL aURL = new URL(photo.URL_thumbnail);
             HttpURLConnection connection = (HttpURLConnection) aURL.openConnection();
             connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            BufferedInputStream buffInput = new BufferedInputStream(input);
+            bitmap = BitmapFactory.decodeStream(buffInput);
+            buffInput.close();
+            input.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public Bitmap getImage(Photo photo)
+    {
+        Bitmap bitmap = null;
+        try
+        {
+            URL aURL = new URL(photo.URL_photo);
+            URLConnection connection = aURL.openConnection();
             connection.connect();
             InputStream input = connection.getInputStream();
             BufferedInputStream buffInput = new BufferedInputStream(input);

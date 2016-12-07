@@ -34,7 +34,6 @@ public class Photo {
         URL_thumbnail = url;
     }
 
-
     public void setPhotoUrl(String url)
     {
         URL_photo = url;
@@ -46,10 +45,10 @@ public class Photo {
         switch(photoType)
         {
             case 1:
-                temp += "_t";
+                temp += "_s";
                 break;
             case 2:
-                temp += "_z";
+                temp += "_b";
                 break;
         }
         temp += ".jpg";

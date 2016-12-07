@@ -87,29 +87,6 @@ public class Flicker {
         }
     }
 
-    public Bitmap getImage(Photo photo)
-    {
-        Bitmap bitmap = null;
-        try
-        {
-            URL aURL = new URL(photo.URL_photo);
-            URLConnection connection = aURL.openConnection();
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            BufferedInputStream buffInput = new BufferedInputStream(input);
-            bitmap = BitmapFactory.decodeStream(buffInput);
-            buffInput.close();
-            input.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
-
-
     public void getThumbnails(ArrayList<Photo> photos)
     {
 
