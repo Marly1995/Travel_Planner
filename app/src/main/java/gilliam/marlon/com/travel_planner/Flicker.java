@@ -87,11 +87,6 @@ public class Flicker {
         }
     }
 
-    public void getThumbnails(ArrayList<Photo> photos)
-    {
-
-    }
-
     public ByteArrayOutputStream readBytes(String urls)
     {
         ByteArrayOutputStream output = null;

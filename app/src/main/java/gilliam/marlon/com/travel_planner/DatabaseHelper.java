@@ -12,12 +12,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "Travel_Database.db";
-    public static final String TABLE_NAME = "Locations_Table";
+
+    public static final String LOCATIONS_TABLE_NAME = "Locations_Table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "Location";
     public static final String COL_3 = "Description";
     public static final String COL_4 = "Latitude";
     public static final String COL_5 = "Longitude";
+
+    public static final String PICTURES_TABLE_NAME = "Pictures_Table";
+    public static final String P_COL_1 = "ID";
+    public static final String P_COL_2 = "Location_Id";
+    public static final String P_COL_3 = "Picture";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -26,13 +33,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(("create table " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, LOCATION TEXT, DESCRIPTION TEXT, LATITUDE FLOAT, LONGITUDE FLOAT)"));
+        db.execSQL(("create table " + LOCATIONS_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, LOCATION TEXT, DESCRIPTION TEXT, LATITUDE FLOAT, LONGITUDE FLOAT)"));
+        db.execSQL(("create table " + PICTURES_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, LOCATION_ID INTEGER, PICTURE BLOB)"));
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
         onCreate(db);
     }
 
@@ -44,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         contentValues.put(COL_3, description);
         contentValues.put(COL_4, latitude);
         contentValues.put(COL_5, longitude);
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long result = db.insert(LOCATIONS_TABLE_NAME, null, contentValues);
         if (result == -1)
         {
             return false;
@@ -52,10 +61,56 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         else { return true;}
     }
 
+    public boolean insertPicture(String location_id, byte[] image)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(P_COL_2, location_id);
+        contentValues.put(P_COL_3, image);
+        long result = db.insert(PICTURES_TABLE_NAME, null, contentValues);
+        if (result == -1)
+        {
+            return false;
+        }
+        else { return true; }
+    }
+
+    public Cursor getPicture()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + PICTURES_TABLE_NAME, null);
+        return res;
+    }
     public Cursor getData()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        Cursor res = db.rawQuery("select * from " + LOCATIONS_TABLE_NAME, null);
         return res;
+    }
+
+    public boolean updateData(String id, String location, String description, String latitude, String longitude)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, id);
+        contentValues.put(COL_2, location);
+        contentValues.put(COL_3, description);
+        contentValues.put(COL_4, latitude);
+        contentValues.put(COL_5, longitude);
+
+        db.update(LOCATIONS_TABLE_NAME, contentValues, "ID = ?", new String[] {id});
+        return true;
+    }
+
+    public Integer deleteData (String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(LOCATIONS_TABLE_NAME, "ID = ?", new String[] {id});
+    }
+
+    public Integer deletePicture (String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(PICTURES_TABLE_NAME, "ID = ?", new String[] {id});
     }
 }

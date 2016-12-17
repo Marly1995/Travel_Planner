@@ -209,6 +209,14 @@ public class Photo_Search extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return bitmap;
+        if (bitmap != null)
+        {
+            return bitmap;
+        }
+        else
+        {
+            return bitmap = getThumbnail(photo);
+        }
+
     }
 }

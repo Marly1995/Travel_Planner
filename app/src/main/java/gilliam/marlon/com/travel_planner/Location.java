@@ -13,26 +13,34 @@ import android.widget.Toast;
 
 public class Location extends Activity {
 
+    EditText editId;
     EditText editLocation;
     EditText editDescription;
     EditText editLatitude;
     EditText editLongitude;
     Button addData;
     Button viewData;
+    Button updateData;
+    Button deleteData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        editId = (EditText) findViewById(R.id.editId);
         editLocation = (EditText) findViewById(R.id.editLocation);
         editDescription = (EditText) findViewById(R.id.editDescription);
         editLatitude = (EditText) findViewById(R.id.editLatitude);
         editLongitude = (EditText) findViewById(R.id.editLongitude);
         addData = (Button) findViewById(R.id.addData);
         viewData = (Button) findViewById(R.id.viewData);
+        updateData = (Button) findViewById(R.id.updateData);
+        deleteData = (Button) findViewById(R.id.deleteData);
         AddData();
-        viewAll();
+        ViewData();
+        UpdateData();
+        DeleteData();
     }
 
     @Override
@@ -70,17 +78,45 @@ public class Location extends Activity {
                         if (isInserted == true)
                         {
                             Toast toast = Toast.makeText(Location.this, "Data is in", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                         else
                         {
                             Toast toast = Toast.makeText(Location.this, "Data not in", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     }
                 }
         );
     }
 
-    public void viewAll()
+    public void UpdateData()
+    {
+        updateData.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isUpdated = Home.myDb.updateData(editId.getText().toString(),
+                                editLocation.getText().toString(),
+                                editDescription.getText().toString(),
+                                editLatitude.getText().toString(),
+                                editLongitude.getText().toString());
+                        if (isUpdated == true)
+                        {
+                            Toast toast = Toast.makeText(Location.this, "Data Updated", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                        else
+                        {
+                            Toast toast = Toast.makeText(Location.this, "Data not Updated", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    }
+                }
+        );
+    }
+
+    public void ViewData()
     {
         viewData.setOnClickListener(
                 new View.OnClickListener()
@@ -105,6 +141,28 @@ public class Location extends Activity {
                         }
 
                         showMessage("Data", buffer.toString());
+                    }
+                }
+        );
+    }
+
+    public void DeleteData()
+    {
+        deleteData.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer deletedRows = Home.myDb.deleteData(editId.getText().toString());
+                        if (deletedRows > 0)
+                        {
+                            Toast toast = Toast.makeText(Location.this, "Data Deleted", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                        else
+                        {
+                            Toast toast = Toast.makeText(Location.this, "Data not Deleted", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
                     }
                 }
         );
