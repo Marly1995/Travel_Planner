@@ -15,10 +15,13 @@ import java.util.ArrayList;
 
 public class Home extends Activity {
 
+    public static DatabaseHelper myDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        myDb = new DatabaseHelper(this);
     }
 
     @Override
@@ -46,6 +49,12 @@ public class Home extends Activity {
     public void invokePhotoSearch(View view)
     {
         Intent intent = new Intent(this, Photo_Search.class);
+        startActivity(intent);
+    }
+
+    public void invokeDatabaseLocation(View view)
+    {
+        Intent intent = new Intent(this, Location.class);
         startActivity(intent);
     }
 }

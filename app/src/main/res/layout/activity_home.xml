@@ -13,4 +13,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:onClick="invokePhotoSearch" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="database"
+        android:id="@+id/database"
+        android:layout_below="@+id/Photo_Button"
+        android:layout_alignParentStart="true"
+        android:onClick="invokeDatabaseLocation" />
 </RelativeLayout>
