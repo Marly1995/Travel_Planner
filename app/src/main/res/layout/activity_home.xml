@@ -27,8 +27,8 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/database"
-        android:layout_alignEnd="@+id/database"
         android:id="@+id/map"
-        android:onClick="invokeMap" />
+        android:onClick="invokeMap"
+        android:layout_below="@+id/database"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

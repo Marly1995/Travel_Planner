@@ -3,6 +3,7 @@ package gilliam.marlon.com.travel_planner;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Location extends Activity {
 
     EditText editId;
@@ -18,15 +21,28 @@ public class Location extends Activity {
     EditText editDescription;
     EditText editLatitude;
     EditText editLongitude;
+
     Button addData;
     Button viewData;
     Button updateData;
     Button deleteData;
 
+    LatLng latLong;
+    String lat;
+    String lng;
+    Bundle extras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            lat = extras.getString("lat");
+            lng = extras.getString("lng");
+        }
 
         editId = (EditText) findViewById(R.id.editId);
         editLocation = (EditText) findViewById(R.id.editLocation);
@@ -41,6 +57,8 @@ public class Location extends Activity {
         ViewData();
         UpdateData();
         DeleteData();
+        editLatitude.setText(lat);
+        editLongitude.setText(lng);
     }
 
     @Override
