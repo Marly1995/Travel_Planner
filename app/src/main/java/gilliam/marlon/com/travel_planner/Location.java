@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Location extends Activity {
 
-    EditText editId;
     EditText editLocation;
     EditText editDescription;
     EditText editLatitude;
@@ -28,9 +27,13 @@ public class Location extends Activity {
     Button deleteData;
 
     LatLng latLong;
+    String location;
     String lat;
     String lng;
+    String id;
     Bundle extras;
+
+    String editId = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,10 @@ public class Location extends Activity {
         {
             lat = extras.getString("lat");
             lng = extras.getString("lng");
+            location = extras.getString("NAME");
+
         }
 
-        editId = (EditText) findViewById(R.id.editId);
         editLocation = (EditText) findViewById(R.id.editLocation);
         editDescription = (EditText) findViewById(R.id.editDescription);
         editLatitude = (EditText) findViewById(R.id.editLatitude);
@@ -59,6 +63,7 @@ public class Location extends Activity {
         DeleteData();
         editLatitude.setText(lat);
         editLongitude.setText(lng);
+        editLocation.setText(location);
     }
 
     @Override
@@ -114,7 +119,7 @@ public class Location extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isUpdated = Home.myDb.updateData(editId.getText().toString(),
+                        boolean isUpdated = Home.myDb.updateData(editId,
                                 editLocation.getText().toString(),
                                 editDescription.getText().toString(),
                                 editLatitude.getText().toString(),
@@ -170,7 +175,7 @@ public class Location extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Integer deletedRows = Home.myDb.deleteData(editId.getText().toString());
+                        Integer deletedRows = Home.myDb.deleteData(editId);
                         if (deletedRows > 0)
                         {
                             Toast toast = Toast.makeText(Location.this, "Data Deleted", Toast.LENGTH_LONG);

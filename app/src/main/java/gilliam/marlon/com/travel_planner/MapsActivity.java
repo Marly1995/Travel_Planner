@@ -106,6 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent addLocation = new Intent(MapsActivity.this, Location.class);
         addLocation.putExtra("lat", latitude);
         addLocation.putExtra("lng", longitude);
+        addLocation.putExtra("NAME", location);
         startActivity(addLocation);
     }
 }

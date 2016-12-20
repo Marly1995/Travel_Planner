@@ -63,4 +63,10 @@ public class Home extends Activity {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
+    public void invokeLocations(View view)
+    {
+        Intent intent = new Intent(this, LocationList.class);
+        startActivity(intent);
+    }
 }
