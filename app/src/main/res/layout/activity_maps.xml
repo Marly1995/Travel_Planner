@@ -48,6 +48,6 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gilliam.marlon.com.travel_planner.MapsActivity" />
+    tools:context="gilliam.marlon.com.travel_planner.MapSearch" />
 
 </LinearLayout>

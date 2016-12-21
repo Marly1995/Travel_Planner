@@ -6,12 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Gallery;
-import android.widget.ImageView;
-
-import java.util.ArrayList;
 
 public class Home extends Activity {
 
@@ -48,7 +42,7 @@ public class Home extends Activity {
 
     public void invokePhotoSearch(View view)
     {
-        Intent intent = new Intent(this, Photo_Search.class);
+        Intent intent = new Intent(this, PhotoSearch.class);
         startActivity(intent);
     }
 
@@ -60,7 +54,7 @@ public class Home extends Activity {
 
     public void invokeMap(View view)
     {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, MapSearch.class);
         startActivity(intent);
     }
 

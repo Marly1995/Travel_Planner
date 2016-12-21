@@ -20,9 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-import static com.google.android.gms.maps.UiSettings.*;
-
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapSearch extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private UiSettings mUiSettings;
@@ -103,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             latitude = lat.toString();
             longitude = lng.toString();
         }
-        Intent addLocation = new Intent(MapsActivity.this, Location.class);
+        Intent addLocation = new Intent(MapSearch.this, Location.class);
         addLocation.putExtra("lat", latitude);
         addLocation.putExtra("lng", longitude);
         addLocation.putExtra("NAME", location);

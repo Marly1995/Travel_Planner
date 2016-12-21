@@ -1,8 +1,10 @@
 package gilliam.marlon.com.travel_planner;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -45,7 +47,7 @@ public class ImageAdapter extends BaseAdapter {
         if(convertView == null)
         {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
+            imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(12, 12, 12, 12);
         }

@@ -7,4 +7,5 @@
     <string name="title_activity_photo_display">PhotoDisplay</string>
     <string name="title_activity_location">Location</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_map_display">Map</string>
 </resources>

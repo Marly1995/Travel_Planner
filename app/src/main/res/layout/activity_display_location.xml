@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="gilliam.marlon.com.travel_planner.DisplayLocation">
+    tools:context="gilliam.marlon.com.travel_planner.LocationDisplay">
 
     <TextView
         android:text="title"
@@ -48,25 +48,38 @@
         android:id="@+id/deleteButton"
         android:onClick="invokeDeleteLocation" />
 
-    <Button
-        android:text="search photos"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/photoButton"
-        android:onClick="invokePhotoSearch" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/descriptionText">
 
     <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="277dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/descriptionText"
-        android:layout_above="@+id/editButton">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+        android:layout_above="@+id/editButton"
+        android:layout_height="200dp"
+        android:fillViewport="false">
     </HorizontalScrollView>
+
+        <Button
+            android:text="search photos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoButton"
+            android:onClick="invokePhotoSearch"
+            android:layout_marginBottom="34dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mapButton"
+            android:onClick="invokeShowOnMap" />
+
+    </LinearLayout>
 </RelativeLayout>

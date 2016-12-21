@@ -1,12 +1,14 @@
 package gilliam.marlon.com.travel_planner;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DisplayLocation extends Activity {
+public class LocationDisplay extends Activity {
 
     Place myPlace = new Place();
     TextView location;
@@ -38,7 +40,7 @@ public class DisplayLocation extends Activity {
         cursor = Home.myDb.getPlace(id);
         if(cursor.getCount() == 0)
         {
-            Toast toast = Toast.makeText(DisplayLocation.this, "No data found", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(LocationDisplay.this, "No data found", Toast.LENGTH_LONG);
             toast.show();
             return;
         }
@@ -52,5 +54,22 @@ public class DisplayLocation extends Activity {
         }
         location.setText(myPlace.location);
         description.setText(myPlace.description);
+    }
+
+    public void invokeShowOnMap(View view)
+    {
+        Intent intent = new Intent(LocationDisplay.this, MapDisplay.class);
+        intent.putExtra("LAT", myPlace.latitude);
+        intent.putExtra("LONG", myPlace.longitude);
+        startActivity(intent);
+    }
+
+    public void invokePhotoSearch(View view)
+    {
+        Intent intent = new Intent(LocationDisplay.this, PhotoSearch.class);
+        intent.putExtra("LAT", myPlace.latitude);
+        intent.putExtra("LONG", myPlace.longitude);
+        intent.putExtra("ID", myPlace.id);
+        startActivity(intent);
     }
 }

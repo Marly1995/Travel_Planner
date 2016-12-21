@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Photo_Search"
+            android:name=".PhotoSearch"
             android:label="@string/title_activity_photo__search"
             android:parentActivityName=".Home">
             <meta-data
@@ -34,7 +34,7 @@
                 android:value="gilliam.marlon.com.travel_planner.Home" />
         </activity>
         <activity
-            android:name=".imagePopUp"
+            android:name=".PhotoDisplay"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".Location"
@@ -57,10 +57,19 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MapSearch"
             android:label="@string/title_activity_maps" />
         <activity android:name=".LocationList" />
-        <activity android:name=".DisplayLocation"></activity>
+        <activity android:name=".LocationDisplay" />
+        <activity
+            android:name=".MapDisplay"
+            android:theme="@style/AppTheme.CustomTheme"
+            android:label="@string/title_activity_map_display">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="gilliam.marlon.com.travel_planner.LocationDisplay" />
+
+        </activity>
     </application>
 
 </manifest>

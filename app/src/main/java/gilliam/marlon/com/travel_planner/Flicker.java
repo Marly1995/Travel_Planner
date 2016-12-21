@@ -41,7 +41,7 @@ public class Flicker {
     private static int CONNECT_TIMEOUT_MS = 5000;
     private static int READ_TIMEOUT_MS = 15000;
 
-    public String createURL(int methodId, String search_parameter)
+    public String createURL(int methodId, String search_parameter, String lat, String lng)
     {
         String method_type = null;
         String url = null;
@@ -49,7 +49,7 @@ public class Flicker {
         {
             case PHOTO_SEARCH_ID:
                 method_type = SEARCH_PHOTOS;
-                url = URL_BASE + method_type + API_SEARCH_KEY + TAGS + search_parameter + FORMAT + "&per_page=20&nojsoncallback=1";
+                url = URL_BASE + method_type + API_SEARCH_KEY + "&lat="+ lat + "&lon=" + lng + "&accuracy=11" + TAGS + search_parameter + FORMAT + "&per_page=20&nojsoncallback=1";
                         break;
             case SIZE_SEARCH_ID:
                 method_type = GET_PHOTO_SIZES;
@@ -61,7 +61,7 @@ public class Flicker {
 
     public void getImageURLS(Photo photo)
     {
-        String url = createURL(SIZE_SEARCH_ID, photo.id);
+        String url = createURL(SIZE_SEARCH_ID, photo.id, "", "");
         ByteArrayOutputStream output = readBytes(url);
         String json = output.toString();
         try

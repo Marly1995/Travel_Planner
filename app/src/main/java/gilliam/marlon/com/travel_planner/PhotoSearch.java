@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,14 +32,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class Photo_Search extends Activity {
+public class PhotoSearch extends Activity {
 
     private ArrayList<Photo> photoList = new ArrayList<Photo>();
     private ArrayList<Bitmap> thumbList;
 
     private Button download;
     private GridView gallery;
-    private ImageView imgView;
     private EditText search;
 
     private Flicker flickr = new Flicker();
@@ -50,8 +50,12 @@ public class Photo_Search extends Activity {
     String server;
     int farm;
 
-    Bitmap bit;
+    String placeID;
+    String placeLAT;
+    String placeLONG;
 
+    Bitmap bit;
+    Bundle extras;
     Context context = this;
 
     @Override
@@ -59,10 +63,17 @@ public class Photo_Search extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo__search);
 
+        extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            placeID = extras.getString("ID");
+            placeLAT = extras.getString("LAT");
+            placeLONG = extras.getString("LONG");
+        }
+
         download = (Button) findViewById(R.id.download);
         search = (EditText) findViewById(R.id.search);
         gallery = (GridView) findViewById(R.id.gallery);
-        imgView = (ImageView) findViewById(R.id.imageView);
         //gallery.SetOnClickListener(imageListener);
 
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +82,7 @@ public class Photo_Search extends Activity {
                 Bitmap img = photoList.get(position).photo;
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
                 img.compress(Bitmap.CompressFormat.JPEG, 50, bs);
-                Intent popUp = new Intent(Photo_Search.this, imagePopUp.class);
+                Intent popUp = new Intent(PhotoSearch.this, PhotoDisplay.class);
                 popUp.putExtra("PHOTO_ID", bs.toByteArray());
                 startActivity(popUp);
             }
@@ -87,7 +98,7 @@ public class Photo_Search extends Activity {
     public class AsyncTaskParseJson extends AsyncTask<String, String, String>
     {
         String tags = search.getText().toString();
-        String url = flickr.createURL(1, tags);
+        String url = flickr.createURL(1, tags, placeLAT, placeLONG);
 
         @Override
         protected void onPreExecute() {}
@@ -137,7 +148,7 @@ public class Photo_Search extends Activity {
 
         @Override
         protected void onPostExecute(String strFromDoInBg) {
-            Toast toast = Toast.makeText(Photo_Search.this, "HELLO!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(PhotoSearch.this, "HELLO!", Toast.LENGTH_LONG);
             toast.show();
 
             ImageAdapter imgAdpt = new ImageAdapter(context, photoList);

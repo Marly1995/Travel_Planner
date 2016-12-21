@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by Computing on 07/12/2016.
  */
-public class imagePopUp extends Activity{
+public class PhotoDisplay extends Activity{
 
     private int contentView;
 
@@ -28,7 +28,7 @@ public class imagePopUp extends Activity{
         {
             image = BitmapFactory.decodeByteArray(extras.getByteArray("PHOTO_ID"), 0, extras.getByteArray("PHOTO_ID").length);
         }
-        setContentView(R.layout.image_pop_up);
+        setContentView(R.layout.activity_photo_display);
 
         photoView = (ImageView )findViewById(R.id.photoView);
 
@@ -41,7 +41,7 @@ public class imagePopUp extends Activity{
         double height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*0.8), (int)(height*0.6));
-        Toast toast = Toast.makeText(imagePopUp.this, "Enjoy your image", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(PhotoDisplay.this, "Enjoy your image", Toast.LENGTH_LONG);
         toast.show();
     }
 }
