@@ -6,38 +6,22 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Home">
 
     <Button
+        android:text="View trips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Photo Search"
-        android:id="@+id/Photo_Button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="invokePhotoSearch" />
+        android:id="@+id/locationsButton"
+        android:onClick="invokeLocations"
+        android:layout_marginBottom="172dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="database"
-        android:id="@+id/database"
-        android:layout_below="@+id/Photo_Button"
-        android:layout_alignParentStart="true"
-        android:onClick="invokeDatabaseLocation" />
-
-    <Button
-        android:text="map"
+        android:text="Find a new trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/map"
         android:onClick="invokeMap"
-        android:layout_below="@+id/database"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="locations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
-        android:layout_alignParentStart="true"
-        android:id="@+id/locationsButton"
-        android:onClick="invokeLocations" />
+        android:elevation="0dp"
+        android:layout_above="@+id/locationsButton"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

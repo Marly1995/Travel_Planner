@@ -31,45 +31,49 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="Edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/editButton"
-        android:onClick="invokeEditLocation" />
-
-    <Button
-        android:text="Delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/deleteButton"
-        android:onClick="invokeDeleteLocation" />
-
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/descriptionText">
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/descriptionText"
+        android:weightSum="1">
 
-        <ImageView
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/cast_expanded_controller_actionbar_bg_gradient_light"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/imageView" />
+            android:layout_weight="0.43">
 
-        <Button
-            android:text="search photos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/photoButton"
-            android:onClick="invokePhotoSearch"
-            android:layout_alignParentBottom="true"/>
+            <LinearLayout
+                android:id="@+id/photoGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="Take Photo"
+                android:layout_width="137dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cameraButton"
+                android:onClick="invokeCamera" />
+
+            <Button
+                android:text="search photos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/photoButton"
+                android:onClick="invokePhotoSearch"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <Button
             android:text="Show"
@@ -77,6 +81,26 @@
             android:layout_height="wrap_content"
             android:id="@+id/mapButton"
             android:onClick="invokeShowOnMap" />
+
+        <Button
+            android:text="Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/editButton"
+            android:onClick="invokeEdit"
+            android:layout_weight="0.43" />
+
+        <Button
+            android:text="Delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/deleteButton"
+            android:onClick="invokeDelete"
+            android:layout_weight="0.43" />
 
     </LinearLayout>
 </RelativeLayout>

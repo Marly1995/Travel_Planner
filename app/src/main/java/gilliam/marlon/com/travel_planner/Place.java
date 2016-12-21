@@ -15,6 +15,7 @@ public class Place {
     String latitude;
     String longitude;
     ArrayList<Bitmap> photos;
+    ArrayList<String> photosID;
     String id;
 
     Place(String newId, String loc, String des, String lat, String lng)
@@ -25,6 +26,7 @@ public class Place {
         longitude = lng;
         id = newId;
         photos = new ArrayList<>();
+        photosID = new ArrayList<>();
     }
 
     Place()
@@ -35,5 +37,6 @@ public class Place {
         longitude = "";
         id = "";
         photos = new ArrayList<>();
+        photosID = new ArrayList<>();
     }
 }

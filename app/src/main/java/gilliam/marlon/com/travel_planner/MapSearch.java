@@ -105,6 +105,7 @@ public class MapSearch extends FragmentActivity implements OnMapReadyCallback {
         addLocation.putExtra("lat", latitude);
         addLocation.putExtra("lng", longitude);
         addLocation.putExtra("NAME", location);
+        addLocation.putExtra("mode", "add");
         startActivity(addLocation);
     }
 }

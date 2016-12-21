@@ -2,6 +2,7 @@ package gilliam.marlon.com.travel_planner;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,18 +23,17 @@ public class Location extends Activity {
     EditText editLongitude;
 
     Button addData;
-    Button viewData;
     Button updateData;
-    Button deleteData;
 
     LatLng latLong;
+    String description;
     String location;
     String lat;
     String lng;
     String id;
     Bundle extras;
 
-    String editId = "1";
+    String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +43,35 @@ public class Location extends Activity {
         extras = getIntent().getExtras();
         if(extras != null)
         {
+            id = extras.getString("ID");
             lat = extras.getString("lat");
             lng = extras.getString("lng");
             location = extras.getString("NAME");
-
+            description = extras.getString("DESCRIPTION");
+            mode = extras.getString("mode");
         }
 
         editLocation = (EditText) findViewById(R.id.editLocation);
         editDescription = (EditText) findViewById(R.id.editDescription);
         editLatitude = (EditText) findViewById(R.id.editLatitude);
         editLongitude = (EditText) findViewById(R.id.editLongitude);
-        addData = (Button) findViewById(R.id.addData);
-        viewData = (Button) findViewById(R.id.viewData);
+        addData = (Button) findViewById(R.id.saveData);
         updateData = (Button) findViewById(R.id.updateData);
-        deleteData = (Button) findViewById(R.id.deleteData);
         AddData();
-        ViewData();
         UpdateData();
-        DeleteData();
         editLatitude.setText(lat);
         editLongitude.setText(lng);
         editLocation.setText(location);
+        editDescription.setText(description);
+
+        if (mode.equals("add"))
+        {
+            updateData.setVisibility(View.INVISIBLE);
+        }
+        else if (mode.equals("update"))
+        {
+            addData.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -98,10 +106,24 @@ public class Location extends Activity {
                                 editDescription.getText().toString(),
                                 editLatitude.getText().toString(),
                                 editLongitude.getText().toString());
+                        Cursor res = Home.myDb.getData();
+                        String openId = "";
+                        if(res.getCount() == 0)
+                        {
+                            // error message
+                            return;
+                        }
+                        while(res.moveToNext())
+                        {
+                            openId = res.getString(0);
+                        }
                         if (isInserted == true)
                         {
                             Toast toast = Toast.makeText(Location.this, "Data is in", Toast.LENGTH_LONG);
                             toast.show();
+                            Intent intent = new Intent(Location.this, LocationDisplay.class);
+                            intent.putExtra("ID", openId);
+                            startActivity(intent);
                         }
                         else
                         {
@@ -110,6 +132,7 @@ public class Location extends Activity {
                         }
                     }
                 }
+
         );
     }
 
@@ -119,7 +142,7 @@ public class Location extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isUpdated = Home.myDb.updateData(editId,
+                        boolean isUpdated = Home.myDb.updateData(id,
                                 editLocation.getText().toString(),
                                 editDescription.getText().toString(),
                                 editLatitude.getText().toString(),
@@ -128,6 +151,9 @@ public class Location extends Activity {
                         {
                             Toast toast = Toast.makeText(Location.this, "Data Updated", Toast.LENGTH_LONG);
                             toast.show();
+                            Intent intent = new Intent(Location.this, LocationDisplay.class);
+                            intent.putExtra("ID", id);
+                            startActivity(intent);
                         }
                         else
                         {
@@ -139,57 +165,57 @@ public class Location extends Activity {
         );
     }
 
-    public void ViewData()
-    {
-        viewData.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Cursor res = Home.myDb.getData();
-                        if(res.getCount() == 0)
-                        {
-                            showMessage("Error", "Nothing found");
-                            return;
-                        }
-                        StringBuffer buffer = new StringBuffer();
-                        while(res.moveToNext())
-                        {
-                            buffer.append("Id :" + res.getString(0) + "\n");
-                            buffer.append("Location :" + res.getString(1) + "\n");
-                            buffer.append("Description :" + res.getString(2) + "\n");
-                            buffer.append("Latitude :" + res.getString(3) + "\n");
-                            buffer.append("Longitude :" + res.getString(4) + "\n\n");
-                        }
+//    public void ViewData()
+//    {
+//        viewData.setOnClickListener(
+//                new View.OnClickListener()
+//                {
+//                    @Override
+//                    public void onClick(View v)
+//                    {
+//                        Cursor res = Home.myDb.getData();
+//                        if(res.getCount() == 0)
+//                        {
+//                            showMessage("Error", "Nothing found");
+//                            return;
+//                        }
+//                        StringBuffer buffer = new StringBuffer();
+//                        while(res.moveToNext())
+//                        {
+//                            buffer.append("Id :" + res.getString(0) + "\n");
+//                            buffer.append("Location :" + res.getString(1) + "\n");
+//                            buffer.append("Description :" + res.getString(2) + "\n");
+//                            buffer.append("Latitude :" + res.getString(3) + "\n");
+//                            buffer.append("Longitude :" + res.getString(4) + "\n\n");
+//                        }
+//
+//                        showMessage("Data", buffer.toString());
+//                    }
+//                }
+//        );
+//    }
 
-                        showMessage("Data", buffer.toString());
-                    }
-                }
-        );
-    }
-
-    public void DeleteData()
-    {
-        deleteData.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Integer deletedRows = Home.myDb.deleteData(editId);
-                        if (deletedRows > 0)
-                        {
-                            Toast toast = Toast.makeText(Location.this, "Data Deleted", Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                        else
-                        {
-                            Toast toast = Toast.makeText(Location.this, "Data not Deleted", Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                    }
-                }
-        );
-    }
+//    public void DeleteData()
+//    {
+//        deleteData.setOnClickListener(
+//                new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Integer deletedRows = Home.myDb.deleteData(editId);
+//                        if (deletedRows > 0)
+//                        {
+//                            Toast toast = Toast.makeText(Location.this, "Data Deleted", Toast.LENGTH_LONG);
+//                            toast.show();
+//                        }
+//                        else
+//                        {
+//                            Toast toast = Toast.makeText(Location.this, "Data not Deleted", Toast.LENGTH_LONG);
+//                            toast.show();
+//                        }
+//                    }
+//                }
+//        );
+//    }
 
     public void showMessage(String title, String message)
     {

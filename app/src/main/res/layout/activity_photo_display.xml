@@ -18,4 +18,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:onClick="invokeSavePhoto" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/photoView"
+        android:layout_alignStart="@+id/saveButton"
+        android:id="@+id/deleteButton"
+        android:onClick="invokeDeletePhoto" />
 </RelativeLayout>

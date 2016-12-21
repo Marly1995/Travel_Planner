@@ -85,6 +85,7 @@ public class PhotoSearch extends Activity {
                 Intent popUp = new Intent(PhotoSearch.this, PhotoDisplay.class);
                 popUp.putExtra("PHOTO_ID", bs.toByteArray());
                 popUp.putExtra("ID", placeID);
+                popUp.putExtra("mode", "save");
                 startActivity(popUp);
             }
         });

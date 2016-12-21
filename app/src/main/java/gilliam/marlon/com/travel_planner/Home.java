@@ -40,18 +40,6 @@ public class Home extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void invokePhotoSearch(View view)
-    {
-        Intent intent = new Intent(this, PhotoSearch.class);
-        startActivity(intent);
-    }
-
-    public void invokeDatabaseLocation(View view)
-    {
-        Intent intent = new Intent(this, Location.class);
-        startActivity(intent);
-    }
-
     public void invokeMap(View view)
     {
         Intent intent = new Intent(this, MapSearch.class);
