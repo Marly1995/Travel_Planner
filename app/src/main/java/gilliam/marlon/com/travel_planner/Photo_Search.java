@@ -70,11 +70,10 @@ public class Photo_Search extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bitmap img = photoList.get(position).photo;
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                img.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                img.compress(Bitmap.CompressFormat.JPEG, 50, bs);
                 Intent popUp = new Intent(Photo_Search.this, imagePopUp.class);
                 popUp.putExtra("PHOTO_ID", bs.toByteArray());
                 startActivity(popUp);
-
             }
         });
     }

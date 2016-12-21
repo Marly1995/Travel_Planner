@@ -41,7 +41,7 @@ public class imagePopUp extends Activity{
         double height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*0.8), (int)(height*0.6));
-        Toast toast = Toast.makeText(imagePopUp.this, "HELLO!", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(imagePopUp.this, "Enjoy your image", Toast.LENGTH_LONG);
         toast.show();
     }
 }

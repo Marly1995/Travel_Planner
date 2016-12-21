@@ -30,7 +30,7 @@ public class LocationList extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LocationList.this, DisplayLocation.class);
-                intent.putExtra("place", places.get(position).id);
+                intent.putExtra("ID", places.get(position).id);
                 startActivity(intent);
             }
         });

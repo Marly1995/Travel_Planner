@@ -24,4 +24,13 @@ public class Place {
         longitude = lng;
         id = newId;
     }
+
+    Place()
+    {
+        location = "";
+        description = "";
+        latitude = "";
+        longitude = "";
+        id = "";
+    }
 }

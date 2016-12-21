@@ -88,14 +88,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return res;
     }
 
-    public Place getPlace(String id)
+    public Cursor getPlace(String id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
+        String[] projection = {COL_1, COL_2, COL_3, COL_4, COL_5};
         String where = COL_1 + " = ?";
         String[] whereArgs = {id};
-        Cursor res = db.rawQuery("select * from " + PICTURES_TABLE_NAME + " where " + COL_1 + " = '" + whereArgs + "'", null);
-        Place newPlace = new Place(res.getString(0), res.getString(1), res.getString(2), res.getString(3), res.getString(4));
-        return newPlace;
+        Cursor res = db.query(LOCATIONS_TABLE_NAME, projection, where, whereArgs, null, null, null);
+        return res;
     }
 
     public boolean updateData(String id, String location, String description, String latitude, String longitude)

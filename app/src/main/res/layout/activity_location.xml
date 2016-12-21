@@ -54,14 +54,6 @@
         android:layout_alignBottom="@+id/editLongitude"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add"
-        android:id="@+id/addData"
-        android:layout_below="@+id/editId"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,25 +74,33 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="view"
-        android:id="@+id/viewData"
-        android:layout_alignTop="@+id/addData"
-        android:layout_toEndOf="@+id/addData" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/updateData"
-        android:layout_alignBottom="@+id/viewData"
-        android:layout_toEndOf="@+id/viewData" />
+        android:text="add"
+        android:id="@+id/addData"
+        android:layout_below="@+id/editDescription"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/deleteData"
-        android:layout_alignBottom="@+id/updateData"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/viewData"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/updateData"
+        android:layout_below="@+id/deleteData"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="view"
+        android:id="@+id/viewData"
+        android:layout_below="@+id/addData"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
