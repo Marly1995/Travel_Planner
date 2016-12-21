@@ -2,6 +2,7 @@ package gilliam.marlon.com.travel_planner;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Place {
     String description;
     String latitude;
     String longitude;
-    List<Bitmap> photos;
+    ArrayList<Bitmap> photos;
     String id;
 
     Place(String newId, String loc, String des, String lat, String lng)
@@ -23,6 +24,7 @@ public class Place {
         latitude = lat;
         longitude = lng;
         id = newId;
+        photos = new ArrayList<>();
     }
 
     Place()
@@ -32,5 +34,6 @@ public class Place {
         latitude = "";
         longitude = "";
         id = "";
+        photos = new ArrayList<>();
     }
 }

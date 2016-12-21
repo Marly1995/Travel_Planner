@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_display_location"
     android:layout_width="match_parent"
@@ -55,14 +56,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/descriptionText">
 
-    <HorizontalScrollView
-        android:layout_width="277dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/descriptionText"
-        android:layout_above="@+id/editButton"
-        android:layout_height="200dp"
-        android:fillViewport="false">
-    </HorizontalScrollView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/cast_expanded_controller_actionbar_bg_gradient_light"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageView" />
 
         <Button
             android:text="search photos"
@@ -70,9 +69,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/photoButton"
             android:onClick="invokePhotoSearch"
-            android:layout_marginBottom="34dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentBottom="true"/>
 
         <Button
             android:text="Show"

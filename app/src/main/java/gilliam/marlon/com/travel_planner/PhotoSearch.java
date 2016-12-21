@@ -84,6 +84,7 @@ public class PhotoSearch extends Activity {
                 img.compress(Bitmap.CompressFormat.JPEG, 50, bs);
                 Intent popUp = new Intent(PhotoSearch.this, PhotoDisplay.class);
                 popUp.putExtra("PHOTO_ID", bs.toByteArray());
+                popUp.putExtra("ID", placeID);
                 startActivity(popUp);
             }
         });

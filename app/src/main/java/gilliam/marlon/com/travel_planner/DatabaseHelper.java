@@ -75,10 +75,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         else { return true; }
     }
 
-    public Cursor getPicture()
+    public Cursor getPicture(String id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + PICTURES_TABLE_NAME, null);
+        String[] projection = {P_COL_1, P_COL_2, P_COL_3};
+        String where = P_COL_2 + " = ?";
+        String[] whereArgs = {id};
+        Cursor res = db.query(PICTURES_TABLE_NAME, projection, where, whereArgs, null, null, null);
         return res;
     }
     public Cursor getData()
