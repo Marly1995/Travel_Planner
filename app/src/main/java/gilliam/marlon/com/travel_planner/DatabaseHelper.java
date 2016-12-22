@@ -3,8 +3,11 @@ package gilliam.marlon.com.travel_planner;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
+
+import static gilliam.marlon.com.travel_planner.Home.PRAGMA_KEY;
+import static gilliam.marlon.com.travel_planner.Home.pass;
 
 /**
  * Created by Computing on 17/12/2016.
@@ -28,7 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase.loadLibs(context);
+        SQLiteDatabase db = this.getWritableDatabase("");
+        db.rawExecSQL(PRAGMA_KEY);
     }
 
     @Override
@@ -47,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public boolean insertData(String location, String description, String latitude, String longitude)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, location);
         contentValues.put(COL_3, description);
@@ -63,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public boolean insertPicture(String location_id, byte[] image)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         ContentValues contentValues = new ContentValues();
         contentValues.put(P_COL_2, location_id);
         contentValues.put(P_COL_3, image);
@@ -77,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public Cursor getPicture(String id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         String[] projection = {P_COL_1, P_COL_2, P_COL_3};
         String where = P_COL_2 + " = ?";
         String[] whereArgs = {id};
@@ -86,14 +91,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
     public Cursor getData()
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         Cursor res = db.rawQuery("select * from " + LOCATIONS_TABLE_NAME, null);
         return res;
     }
 
     public Cursor getPlace(String id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         String[] projection = {COL_1, COL_2, COL_3, COL_4, COL_5};
         String where = COL_1 + " = ?";
         String[] whereArgs = {id};
@@ -103,7 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public boolean updateData(String id, String location, String description, String latitude, String longitude)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
         contentValues.put(COL_2, location);
@@ -117,13 +122,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public Integer deleteData (String id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         return db.delete(LOCATIONS_TABLE_NAME, "ID = ?", new String[] {id});
     }
 
     public Integer deletePicture (String id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(pass);
         return db.delete(PICTURES_TABLE_NAME, "ID = ?", new String[] {id});
     }
 }

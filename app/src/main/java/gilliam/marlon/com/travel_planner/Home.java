@@ -7,9 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 public class Home extends Activity {
 
     public static DatabaseHelper myDb;
+    public static String PRAGMA_KEY = "PRAGMA key = 'passphrase';";
+    public static String pass = "passphrase";
+    //public static SQLiteDatabase myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
