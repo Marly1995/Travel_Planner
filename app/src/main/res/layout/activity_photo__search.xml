@@ -35,7 +35,16 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:nestedScrollingEnabled="false"
-                android:onClick="searchPhotos" />
+                android:onClick="searchPhotos"
+
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#191919"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="5"/>
 
         </LinearLayout>
 
@@ -50,9 +59,18 @@
             android:text="Done"
             android:layout_width="138dp"
             android:layout_height="wrap_content"
-            android:layout_align
             android:id="@+id/done"
-            android:layout_below="@+id/gallery" />
+            android:layout_below="@+id/gallery"
+            android:onClick="invokeDone"
+
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#191919"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="5"/>
 
     </LinearLayout>
 

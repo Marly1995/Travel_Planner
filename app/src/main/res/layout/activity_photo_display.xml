@@ -26,5 +26,14 @@
         android:layout_below="@+id/photoView"
         android:layout_alignStart="@+id/saveButton"
         android:id="@+id/deleteButton"
-        android:onClick="invokeDeletePhoto" />
+        android:onClick="invokeDeletePhoto"
+
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#191919"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"/>
 </RelativeLayout>

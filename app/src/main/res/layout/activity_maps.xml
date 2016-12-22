@@ -22,7 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/searchButton"
-            android:onClick="invokeSearch" />
+            android:onClick="invokeSearch"
+
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#191919"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="5"/>
 
     </LinearLayout>
 
@@ -40,7 +49,16 @@
         android:id="@+id/locationButton"
         android:layout_weight="1"
         android:onClick="invokeAddLocation"
-        android:visibility="visible" />
+        android:visibility="visible"
+
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#191919"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"/>
 
 </LinearLayout>
     <fragment

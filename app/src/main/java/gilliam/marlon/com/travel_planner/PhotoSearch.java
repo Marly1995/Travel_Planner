@@ -231,4 +231,11 @@ public class PhotoSearch extends Activity {
         }
 
     }
+
+    public void invokeDone (View view)
+    {
+        Intent intent = new Intent(this, LocationDisplay.class);
+        intent.putExtra("ID", placeID);
+        startActivity(intent);
+    }
 }

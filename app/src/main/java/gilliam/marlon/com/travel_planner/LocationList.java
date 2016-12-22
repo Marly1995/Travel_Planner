@@ -60,4 +60,11 @@ public class LocationList extends Activity {
         ArrayAdapter<String> placeArrayAdapter = new ArrayAdapter<String>(LocationList.this, android.R.layout.simple_expandable_list_item_1, names);
         listView.setAdapter(placeArrayAdapter);
     }
+
+    public void invokeAdd(View view)
+    {
+        Intent intent = new Intent(this, MapSearch.class);
+        startActivity(intent);
+    }
+
 }
