@@ -10,16 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gilliam.marlon.com.travel_planner.LocationDisplay">
 
-    <TextView
-        android:text="title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/locationText"
-        android:layout_alignParentEnd="true"
-        android:fontFamily="sans-serif"
-        android:textSize="24sp" />
 
     <TextView
         android:text="description"
@@ -27,11 +17,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/descriptionText"
         android:layout_below="@+id/locationText"
+        android:background="@drawable/border"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"/>
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
@@ -41,13 +35,15 @@
         <HorizontalScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="0.43">
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_weight="0.74">
+
 
             <LinearLayout
                 android:id="@+id/photoGallery"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" />
         </HorizontalScrollView>
 
@@ -147,4 +143,17 @@
             android:shadowRadius="5"/>
 
     </LinearLayout>
+
+    <TextView
+        android:text="title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationText"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

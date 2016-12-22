@@ -8,40 +8,42 @@
     android:background="#8BBDF7">
 
     <Button
-        android:text="View trips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="View Trips"
         android:id="@+id/locationsButton"
         android:onClick="invokeLocations"
 
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="25sp"
 
         android:background="@drawable/buttonshape"
         android:shadowColor="#191919"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="5"
-        android:layout_below="@+id/map"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="109dp"
+        android:layout_height="200px"
+        android:layout_alignBottom="@+id/map"
+        android:layout_alignStart="@+id/map"
+        android:layout_width="500px" />
 
     <Button
-        android:text="Find a new trip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="Find a New Trip"
         android:id="@+id/map"
         android:onClick="invokeMap"
 
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="25sp"
 
         android:background="@drawable/buttonshape"
         android:shadowColor="#191919"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="5"
-        android:layout_marginTop="149dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/locationsButton"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="66dp"
+        android:layout_height="200px"
+        android:layout_width="500px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

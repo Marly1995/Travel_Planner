@@ -91,7 +91,9 @@ public class LocationDisplay extends Activity {
         layout.setGravity(Gravity.CENTER);
 
         final ImageView imageView = new ImageView(getApplicationContext());
-        imageView.setLayoutParams(new LinearLayout.LayoutParams(180, 180));
+        imageView.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
+        imageView.setPadding(24, 48, 12, 0);
+        imageView.setCropToPadding(true);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageBitmap(photo);
         int newID = Integer.parseInt(myPlace.photosID.get(i));
