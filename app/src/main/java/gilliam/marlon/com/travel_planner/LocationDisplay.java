@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,6 +49,8 @@ public class LocationDisplay extends Activity {
         location = (TextView) findViewById(R.id.locationText);
         description = (TextView) findViewById(R.id.descriptionText);
         myGallery = (LinearLayout) findViewById(R.id.photoGallery);
+
+        description.setMovementMethod(new ScrollingMovementMethod());
 
         initializeLocation();
     }
